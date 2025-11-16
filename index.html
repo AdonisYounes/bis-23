@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adonis — HTML Intro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Optional background texture toggle -->
+  <div class="bg-texture" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <img src="logo.jpg" alt="Site logo" class="logo" />
+    <h1 class="title">Adonis Younes</h1>
+    <p class="tagline">Student • Security-minded Developer • Builder</p>
+
+    <nav class="nav">
+      <a href="#intro">Intro</a>
+      <a href="#bio">Bio</a>
+      <a href="#work">Slider</a>
+      <a href="#links">Links</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Introduction -->
+    <section id="intro" class="card">
+      <h2><span class="accent">Introduction</span></h2>
+      <p>
+        Welcome to my course site. I am using this page to host assignments and
+        showcase my work. You will see different <em>font styles</em>,
+        <strong>weights</strong>, and <span class="color-pop">colors</span> as required.
+      </p>
+    </section>
+
+    <!-- Short bio -->
+    <section id="bio" class="card">
+      <h2>Short Bio</h2>
+      <p>
+        I am a CS student focused on cybersecurity and systems.
+        I enjoy hands-on labs, lifting, and building small tools that make life easier.
+      </p>
+    </section>
+
+    <!-- Image slider section (replaces old single image) -->
+    <section id="work" class="card">
+      <h2>Image Slider</h2>
+      <p class="slider-intro">
+        Use the arrows or dots to move between slides. The slider also advances automatically.
+      </p>
+
+      <div class="slider" aria-label="Image slider">
+        <div class="slides">
+          <!-- Use four of your own images here -->
+          <div class="slide active">
+            <img src="logo.jpg" alt="Personal logo" />
+          </div>
+          <div class="slide">
+            <img src="sample-photo.jpg" alt="Professional headshot" />
+          </div>
+          <div class="slide">
+            <img src="slide-3.jpg" alt="Project photo 1" />
+          </div>
+          <div class="slide">
+            <img src="slide-4.jpg" alt="Project photo 2" />
+          </div>
+        </div>
+
+        <button class="slider-btn prev" aria-label="Previous slide">&#10094;</button>
+        <button class="slider-btn next" aria-label="Next slide">&#10095;</button>
+
+        <div class="slider-dots" aria-label="Slider pagination"></div>
+      </div>
+    </section>
+
+    <!-- Footer with hyperlinks -->
+    <section id="links" class="card">
+      <h2>Helpful Links</h2>
+      <ul class="link-list">
+        <li><a class="hover-pop" href="https://github.com/AdonisYounes" target="_blank" rel="noopener">My GitHub</a></li>
+        <li><a class="hover-pop" href="https://www.w3schools.com/" target="_blank" rel="noopener">W3Schools</a></li>
+        <li><a class="hover-pop" href="https://tympanus.net/codrops/2019/01/31/custom-cursor-effects/" target="_blank" rel="noopener">Mouse / Cursor Effects (reference)</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© All Rights Reserved 2012</p>
+    <p class="mini">
+      Built with HTML and CSS. Background texture optional - toggle in <code>style.css</code>.
+    </p>
+  </footer>
+
+  <!-- Custom cursor elements -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <!-- Slider and cursor scripts -->
+  <script>
+    // ===== Image slider logic =====
+    const slides = document.querySelectorAll(".slide");
+    const prevBtn = document.querySelector(".slider-btn.prev");
+    const nextBtn = document.querySelector(".slider-btn.next");
+    const dotsContainer = document.querySelector(".slider-dots");
+    const sliderElement = document.querySelector(".slider");
+
+    let currentIndex = 0;
+    let autoPlayInterval;
+
+    // Create dots based on number of slides (uses let and for)
+    const dots = [];
+    for (let i = 0; i < slides.length; i++) {
+      const dot = document.createElement("button");
+      dot.classList.add("dot");
+      dot.setAttribute("aria-label", "Go to slide " + (i + 1));
+
+      if (i === 0) {
+        dot.classList.add("active");
+      }
+
+      dot.addEventListener("click", function () {
+        goToSlide(i);
+        resetAutoPlay();
+      });
+
+      dotsContainer.appendChild(dot);
+      dots.push(dot);
+    }
+
+    function goToSlide(index) {
+      if (index < 0) {
+        index = slides.length - 1;
+      }
+      if (index >= slides.length) {
+        index = 0;
+      }
+
+      slides[currentIndex].classList.remove("active");
+      dots[currentIndex].classList.remove("active");
+
+      currentIndex = index;
+
+      slides[currentIndex].classList.add("active");
+      dots[currentIndex].classList.add("active");
+    }
+
+    function nextSlide() {
+      goToSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+      goToSlide(currentIndex - 1);
+    }
+
+    function startAutoPlay() {
+      autoPlayInterval = setInterval(nextSlide, 4000);
+    }
+
+    function resetAutoPlay() {
+      clearInterval(autoPlayInterval);
+      startAutoPlay();
+    }
+
+    nextBtn.addEventListener("click", function () {
+      nextSlide();
+      resetAutoPlay();
+    });
+
+    prevBtn.addEventListener("click", function () {
+      prevSlide();
+      resetAutoPlay();
+    });
+
+    // Pause autoplay on hover for better UX
+    sliderElement.addEventListener("mouseenter", function () {
+      clearInterval(autoPlayInterval);
+    });
+
+    sliderElement.addEventListener("mouseleave", function () {
+      startAutoPlay();
+    });
+
+    // Start autoplay when the page loads
+    startAutoPlay();
+
+    // ===== Custom cursor logic =====
+    const cursorDot = document.querySelector(".cursor-dot");
+    const cursorOutline = document.querySelector(".cursor-outline");
+
+    window.addEventListener("mousemove", function (e) {
+      const x = e.clientX;
+      const y = e.clientY;
+
+      cursorDot.style.left = x + "px";
+      cursorDot.style.top = y + "px";
+
+      cursorOutline.style.left = x + "px";
+      cursorOutline.style.top = y + "px";
+
+      cursorOutline.style.transform = "translate(-50%, -50%) scale(1.2)";
+      setTimeout(function () {
+        cursorOutline.style.transform = "translate(-50%, -50%) scale(1)";
+      }, 100);
+    });
+  </script>
+</body>
+</html>
