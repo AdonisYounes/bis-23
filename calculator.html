@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chronix Invoice Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Your main site styles (nav, background, cursor, etc) -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Chronix specific styling -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Roboto:wght@300;400;500&display=swap');
+
+    :root {
+      --black: #0a0a0b;
+      --gray: #1a1b1d;
+      --silver: #c9c9c9;
+      --gold: #d4af37;
+      --white: #f5f5f5;
+      --accent: #8b6f3d;
+    }
+
+    body.calculator-page {
+      margin: 0;
+      padding-bottom: 40px;
+      font-family: 'Roboto', sans-serif;
+      color: var(--white);
+      background: radial-gradient(circle at top, #202225, #0a0a0b 80%);
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+
+    .invoice-card {
+      background: var(--gray);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.75);
+    }
+
+    .invoice-header {
+      padding: 40px;
+      background: linear-gradient(135deg, var(--black), #1a1b1d, var(--accent));
+      position: relative;
+    }
+
+    .brand-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .brand-tagline {
+      margin-top: 6px;
+      font-size: 14px;
+      opacity: 0.7;
+      letter-spacing: 0.08em;
+    }
+
+    .invoice-detail {
+      position: absolute;
+      top: 40px;
+      right: 40px;
+      text-align: right;
+    }
+
+    .invoice-label {
+      text-transform: uppercase;
+      font-size: 12px;
+      opacity: 0.7;
+      letter-spacing: 0.12em;
+    }
+
+    .invoice-number {
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+
+    .invoice-date input {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--white);
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-top: 6px;
+    }
+
+    .invoice-body {
+      padding: 40px;
+    }
+
+    h3 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 500;
+      font-size: 18px;
+      letter-spacing: 0.2em;
+      margin: 0 0 14px;
+      color: var(--silver);
+      text-transform: uppercase;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      opacity: 0.85;
+      margin-top: 14px;
+    }
+
+    .info-input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--white);
+      margin-top: 6px;
+    }
+
+    .items-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .items-table thead {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .items-table th,
+    .items-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+    }
+
+    .items-table th {
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+      font-size: 11px;
+    }
+
+    .cell-input {
+      width: 100%;
+      padding: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      color: var(--white);
+    }
+
+    .numeric {
+      text-align: right;
+    }
+
+    .summary-card {
+      background: var(--black);
+      border-radius: 18px;
+      padding: 20px;
+      margin-top: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .summary-row label {
+      opacity: 0.7;
+    }
+
+    .summary-row input {
+      width: 120px;
+      padding: 6px 10px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--white);
+      border-radius: 6px;
+      text-align: right;
+    }
+
+    .total-box {
+      margin-top: 16px;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--gold);
+      text-align: right;
+    }
+
+    .footer-text {
+      text-align: center;
+      font-size: 12px;
+      opacity: 0.6;
+      margin-top: 28px;
+      letter-spacing: 0.1em;
+    }
+  </style>
+</head>
+<body class="calculator-page">
+  <!-- Site header and navigation from your main theme -->
+  <header class="site-header">
+    <img src="logo.jpg" alt="Site logo" class="logo">
+    <h1 class="title">BIS 23 Portfolio</h1>
+    <p class="tagline">Front End Projects - Fall 2025</p>
+
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="calculator.html">Invoice Calculator</a>
+      <!-- add more links here if you have other pages -->
+    </nav>
+  </header>
+
+  <div class="page">
+    <div class="invoice-card">
+      <div class="invoice-header">
+        <div class="brand-name">Chronix</div>
+        <div class="brand-tagline">Luxury Time. Precision Built.</div>
+
+        <div class="invoice-detail">
+          <div class="invoice-label">Invoice</div>
+          <div class="invoice-number">#<span id="invoiceNo">9001</span></div>
+          <div class="invoice-date">
+            <input type="date" id="invoiceDate" />
+          </div>
+        </div>
+      </div>
+
+      <div class="invoice-body">
+        <h3>Bill To</h3>
+        <label>Name <input class="info-input" type="text"></label>
+        <label>Address <input class="info-input" type="text"></label>
+        <label>Phone <input class="info-input" type="text"></label>
+
+        <h3 style="margin-top:30px;">Order Details</h3>
+
+        <table class="items-table">
+          <thead>
+            <tr>
+              <th>Watch Model</th>
+              <th>Qty</th>
+              <th>Unit Price ($)</th>
+              <th>Line Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input class="cell-input" type="text" placeholder="Chronix Phantom X"></td>
+              <td><input class="cell-input numeric qty" type="number" value="0"></td>
+              <td><input class="cell-input numeric price" type="number" value="0"></td>
+              <td class="numeric">$<span class="line-total">0.00</span></td>
+            </tr>
+            <tr>
+              <td><input class="cell-input" type="text" placeholder="Chronix Eclipse Pro"></td>
+              <td><input class="cell-input numeric qty" type="number" value="0"></td>
+              <td><input class="cell-input numeric price" type="number" value="0"></td>
+              <td class="numeric">$<span class="line-total">0.00</span></td>
+            </tr>
+            <tr>
+              <td><input class="cell-input" type="text" placeholder="Chronix Vanguard"></td>
+              <td><input class="cell-input numeric qty" type="number" value="0"></td>
+              <td><input class="cell-input numeric price" type="number" value="0"></td>
+              <td class="numeric">$<span class="line-total">0.00</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="summary-card">
+          <div class="summary-row">
+            <label>Subtotal</label>
+            <div>$<span id="subtotal">0.00</span></div>
+          </div>
+          <div class="summary-row">
+            <label>Tax Rate (%)</label>
+            <input type="number" id="taxRate" value="0">
+          </div>
+          <div class="summary-row">
+            <label>Other Costs ($)</label>
+            <input type="number" id="otherCosts" value="0">
+          </div>
+          <div class="total-box">$<span id="grandTotal">0.00</span></div>
+        </div>
+
+        <div class="footer-text">
+          Thank you for choosing Chronix - Where every second matters.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function formatMoney(value) {
+      return value.toFixed(2);
+    }
+
+    function recalcInvoice() {
+      const rows = document.querySelectorAll(".items-table tbody tr");
+      let subtotal = 0;
+
+      rows.forEach((row) => {
+        const qty = parseFloat(row.querySelector(".qty").value) || 0;
+        const price = parseFloat(row.querySelector(".price").value) || 0;
+        const lineTotal = qty * price;
+        row.querySelector(".line-total").textContent = formatMoney(lineTotal);
+        subtotal += lineTotal;
+      });
+
+      document.getElementById("subtotal").textContent = formatMoney(subtotal);
+
+      const tax = parseFloat(document.getElementById("taxRate").value) || 0;
+      const other = parseFloat(document.getElementById("otherCosts").value) || 0;
+      const grand = subtotal + (subtotal * (tax / 100)) + other;
+
+      document.getElementById("grandTotal").textContent = formatMoney(grand);
+    }
+
+    document.querySelectorAll(".qty, .price").forEach(input => {
+      input.addEventListener("input", recalcInvoice);
+    });
+
+    document.getElementById("taxRate").addEventListener("input", recalcInvoice);
+    document.getElementById("otherCosts").addEventListener("input", recalcInvoice);
+
+    recalcInvoice();
+  </script>
+</body>
+</html>

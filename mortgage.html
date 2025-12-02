@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mortgage Calculator — Arcade Edition</title>
+
+  <!-- Main site styles (header/nav/theme) -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Mortgage-specific styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="crt" style="cursor: auto;">
+
+  <!-- Site header and nav shared with home page -->
+  <header class="site-header">
+    <img src="logo.jpg" alt="Site logo" class="logo" />
+    <h1 class="title">Adonis Younes</h1>
+    <p class="tagline">Student • Security-minded Developer • Builder</p>
+
+    <nav class="nav">
+      <a href="index.html#intro">Intro</a>
+      <a href="index.html#bio">Bio</a>
+      <a href="index.html#work">Slider</a>
+      <a href="index.html#links">Links</a>
+      <a href="calculator.html">Invoice Calculator</a>
+      <a href="mortgage.html">Mortgage Calculator</a>
+    </nav>
+  </header>
+
+  <!-- CRT mortgage calculator content -->
+  <div class="scanlines"></div>
+
+  <main class="wrap">
+    <header class="header">
+      <img src="assets/home.png" class="logo" alt="logo" />
+
+      <div>
+        <h1 class="arcade-title">MORTGAGE CALCULATOR</h1>
+        <p class="subtitle">
+          Insert values ▸ press <span class="blink">START</span>
+        </p>
+      </div>
+    </header>
+
+    <section class="card pixel-border">
+      <form id="mortgageForm">
+        <div class="grid">
+          <div class="field">
+            <label>LOAN ($)</label>
+            <input type="number" id="amount" placeholder="350000">
+          </div>
+
+          <div class="field">
+            <label>APR (%)</label>
+            <input type="number" id="rate" placeholder="6.75">
+          </div>
+
+          <div class="field">
+            <label>TERM (YEARS)</label>
+            <input type="number" id="years" placeholder="30">
+          </div>
+
+          <div class="field">
+            <label>EXTRA / MONTH ($)</label>
+            <input type="number" id="extra" placeholder="0">
+            <small class="hint">optional</small>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn primary glow">START</button>
+          <button type="reset" class="btn ghost">RESET</button>
+        </div>
+      </form>
+
+      <div class="result" id="result">
+        <p>Enter values and press <b>START</b>.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>By Adonis Younes.</p>
+    </footer>
+  </main>
+
+  <script src="mortgage.js"></script>
+</body>
+</html>
