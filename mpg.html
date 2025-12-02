@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MPG Calculator</title>
+
+  <!-- Main site theme -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- MPG-specific styles -->
+  <link rel="stylesheet" href="mpg.css" />
+</head>
+<body>
+  <!-- Shared header + nav -->
+  <header class="site-header">
+    <img src="logo.jpg" alt="Site logo" class="logo" />
+    <h1 class="title">Adonis Younes</h1>
+    <p class="tagline">Student • Security-minded Developer • Builder</p>
+
+ <nav class="nav">
+  <a href="index.html#intro">Intro</a>
+  <a href="index.html#bio">Bio</a>
+  <a href="index.html#work">Slider</a>
+  <a href="index.html#links">Links</a>
+  <a href="calculator.html">Invoice Calculator</a>
+  <a href="mortgage.html">Mortgage Calculator</a>
+  <a href="mpg.html">MPG Calculator</a>
+</nav>
+
+  </header>
+
+  <!-- MPG app content (adapted from your original index(2).html) -->
+  <main class="wrap">
+    <header class="header">
+      <!-- you can swap this for another image if you want -->
+      <img src="logo.jpg" alt="MPG Calculator logo" class="logo" />
+      <div class="titles">
+        <h1>MPG Calculator</h1>
+        <p class="subtitle">Compute miles per gallon quickly and clearly</p>
+      </div>
+    </header>
+
+    <section class="card">
+      <form id="mpgForm" novalidate>
+        <div class="field">
+          <label for="miles">Miles traveled</label>
+          <input
+            type="number"
+            id="miles"
+            name="miles"
+            inputmode="decimal"
+            placeholder="e.g., 325.5"
+            min="0"
+            step="any"
+            required
+          />
+          <small class="hint">Enter the distance you drove.</small>
+        </div>
+
+        <div class="field">
+          <label for="gallons">Gallons used</label>
+          <input
+            type="number"
+            id="gallons"
+            name="gallons"
+            inputmode="decimal"
+            placeholder="e.g., 10.2"
+            min="0.000001"
+            step="any"
+            required
+          />
+          <small class="hint">Fuel consumed for that distance.</small>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn primary">Calculate MPG</button>
+          <button type="reset" class="btn ghost">Clear</button>
+        </div>
+      </form>
+
+      <output id="result" class="result" aria-live="polite">
+        Enter values and hit <b>Calculate</b>.
+      </output>
+    </section>
+
+    <footer class="footer">
+      <p>Made for class — no external libraries.</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

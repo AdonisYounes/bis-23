@@ -1,0 +1,182 @@
+/* ===== MPG Calculator Theme ===== */
+
+:root {
+  --bg: #0f1220;
+  --text: #e8ecf3;
+  --muted: #9aa3b7;
+  --accent: #7aa2ff;
+  --accent-2: #98f5e1;
+}
+
+/* Reset + base layout */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* IMPORTANT: Show real cursor on this page */
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color: var(--text);
+  background:
+    radial-gradient(60rem 60rem at 10% -10%, rgba(122,162,255,.15), transparent 60%),
+    radial-gradient(60rem 60rem at 110% 10%, rgba(77,212,255,.12), transparent 60%),
+    radial-gradient(80rem 80rem at -10% 110%, rgba(122,162,255,.08), transparent 60%),
+    var(--bg);
+  cursor: auto !important; /* ADDED */
+}
+
+/* Wrapper for page content */
+.wrap {
+  max-width: 620px;
+  margin: 30px auto;
+  padding: 0 16px;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.header .logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+}
+
+.header .titles h1 {
+  font-size: 32px;
+  margin: 0;
+  color: var(--accent);
+}
+
+.header .subtitle {
+  color: var(--muted);
+  margin-top: 6px;
+  font-size: 0.95rem;
+}
+
+/* Card container */
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 24px 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Form fields */
+.field {
+  margin-bottom: 18px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--accent-2);
+}
+
+.field input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text);
+  font-size: 1rem;
+  transition: border 0.2s ease;
+}
+
+.field input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* Buttons */
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn.primary {
+  background: var(--accent);
+  color: #000;
+}
+
+.btn.primary:hover {
+  background: #a8c6ff;
+  transform: translateY(-1px);
+}
+
+.btn.ghost {
+  background: rgba(255,255,255,0.08);
+  color: var(--text);
+}
+
+.btn.ghost:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-1px);
+}
+
+/* Output result box */
+.result {
+  margin-top: 20px;
+  padding: 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Smooth responsive design */
+@media (max-width: 480px) {
+  .header .titles h1 {
+    font-size: 26px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
