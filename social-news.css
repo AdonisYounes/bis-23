@@ -1,0 +1,56 @@
+/* ===== Social News Page ===== */
+
+.social-news-wrapper {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.social-news-card {
+  background: #14182a;
+  color: #e8ecf3;
+  max-width: 600px;
+  width: 100%;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+  text-align: center;
+}
+
+.social-news-card h1 {
+  margin-bottom: 1rem;
+}
+
+.tagline {
+  color: #b7c0d1;
+  margin-bottom: 1rem;
+}
+
+.hint {
+  font-size: 0.95rem;
+  color: #9aa3b5;
+  margin-bottom: 1.5rem;
+}
+
+.note {
+  font-size: 0.85rem;
+  color: #8a93a8;
+  margin-top: 1.5rem;
+}
+
+#launchBtn {
+  background: linear-gradient(135deg, #7aa2ff, #98f5e1);
+  border: none;
+  border-radius: 999px;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #0f1220;
+}
+
+#launchBtn:hover {
+  filter: brightness(1.05);
+}
